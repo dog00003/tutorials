@@ -1,2 +1,4 @@
-Hello my name is jack and i like to code here you will find all the code from my TikTok tutorials 
-if you have any questions please do ask and i am happy to help
+Any questions, feedback or suggestions please email me: robloxstudiotutorials15@gmail.com
+
+
+and my Tiktok if you dont understand how to use the code it may help: https://www.tiktok.com/@learnrobloxstudio
