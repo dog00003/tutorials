@@ -1,21 +1,27 @@
-script.Parent.Touched:Connect(function(plr)    -- when the part is touched run this script
-	if plr.Parent:FindFirstChild("Humanoid") then      --If the thing that touches the 
-											--part has a Humanoid which all players have		
-		plr.Parent.Humanoid.Health = 0  	--it will kill the player
+local Part = script.Parent
+
+-- Insta-Kill
+Part.Touched:Connect(function(part: Part | any): ()
+	-- Check whatever touches the part has a Humanoid and a HumanoidRootPart.
+	if part.Parent:FindFirstChild("Humanoid") and part.Parent:FindFirstChild("HumanoidRootPart") then
+		local Character = part.Parent
+		Character.Humanoid.Health = nil -- Insta-Kills the player.
 	end
 end)
 
+-- Damage
+local Debounce = false
 
---If you would like it to only the damage the player a bit use the script below instead so basicly delete the top or bottom
---btw players start with 100 health
+Part.Touched:Connect(function(part: Part | any): ()
+	-- Check if whatever touches the part has a Humanoid and a HumanoidRootPart, and if the code is not on debounce, because a player touched it.
+	if part.Parent:FindFirstChild("Humanoid") and part.Parent:FindFirstChild("HumanoidRootPart") and not Debounce then
+		local Character = part.Parent
+		Character.Humanoid.Health -= 25 -- Damages the Player 25 HP
 
-script.Parent.Touched:Connect(function(plr)    
-	if plr.Parent:FindFirstChild("Humanoid") then     
-		plr.Parent.Humanoid.Health -= 25 --takes away 25 health of the players current health
-		script.Disabled = true	--disabling the script gives the player chance to move away
-		wait(0.5)			 --but only for 0.5 sec you can change this to the delay you want
-		script.Disabled = false --turns the script back on so the player will be 
-		--damaged if they touch it again
-		
+		Debounce = true -- Set debounce to true to prevent multiple touches from triggering this block immediately.
+
+		task.wait(0.5) -- Wait for 0.5 seconds before allowing the next touch to trigger.
+
+		Debounce = false -- Reset debounce to false to allow the next touch to trigger this block.
 	end
 end)
